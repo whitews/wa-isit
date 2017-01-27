@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>Image Sub-region Identifier</title>
+  <link rel="stylesheet" type="text/css" media="all" href="../css/bootstrap.css">
+  <link rel="stylesheet" type="text/css" media="all" href="../css/angular-areas.css">
+  <link rel="stylesheet" type="text/css" href="../css/style.css">
+  <script src="/js/jquery.js"></script>
+  <script src="/js/angular.js"></script>
+  <script src="/js/angular-route.js"></script>
+  <script src="/js/angular-resource.js"></script>
+  <script src="/js/angular-areas.js"></script>
+  <script src="/js/ui-bootstrap-tpls-2.4.0.min.js"></script>
+</head>
+
+<body>
+
+  <div class="container" ng-app="ISIApp" ng-controller="MainController">
+    <div class="row">
+      <h1>Image Sub-region Identifier</h1>
+    </div>
+
+    <div class="row">
+      <div class="btn-group" uib-dropdown>
+        <button id="split-button" type="button" class="btn btn-default">Choose Image</button>
+        <button type="button" class="btn btn-default" uib-dropdown-toggle>
+          <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="split-button">
+          <li ng-repeat="img in images">
+            <a ng-click="image_selected(img)">{{img.name}}</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <p></p>
+
+    <div class="row">
+      <div class="col-md-10">
+        <img ng-areas="init_regions" ng-areas-width="900"
+             ng-areas-allow="{'edit':true, 'move':true, 'resize':true, 'select':true, 'remove':true, 'nudge':false}"
+             ng-areas-on-change="areas_changed"
+             ng-areas-on-add="areas_changed"
+             ng-areas-extend-data="{pageNumber: 1, tag: 'width900'}"
+				     ng-src="api/images/{{current_image}}?type=jpg"
+             ng-show="current_image"/>
+
+        <!--<img ng-src="api/images/{{current_image}}?type=jpg" ng-show="current_image"/>-->
+      </div>
+      <div class="col-md-2" id="actions">
+          <button type="button" class="btn btn-primary" ng-click="identify_regions()">Identify Regions</button>
+      </div>
+    </div>
+
+  </div>
+
+  <script src="/ng-app/app.js"></script>
+  <script src="/ng-app/services/restService.js"></script>
+  <script src="/ng-app/controllers/main_controller.js"></script>
+
+</body>
+
+</html>

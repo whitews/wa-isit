@@ -1,0 +1,13 @@
+*.pyc
+.idea
+.DS_Store
+build
+dist
+*.egg-info
+*.tif
+*.tiff
+*.png
+*.jpg
+*.jpeg
+
+data
