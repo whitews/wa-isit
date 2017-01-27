@@ -195,17 +195,17 @@ ngAreas.directive("ngAreas", ['$parse', function ($parse) {
                                 top = area.height - semiheight - 1;
 
                             } else {                            // === East & West ===
-                                top = Math.round(area.height / 2) - semiheight - 1;
+                                top = Math.round(area.height / 2) - semiheight - 5;
                             }
 
                             if (horizontal === "e") {           // ====== *East ======
                                 left = area.width - semiwidth - 1;
 
                             } else if (horizontal === "w") {    // ====== *West ======
-                                left = - semiwidth - ((semiwidth> 20)? 10: 5);
+                                left = - semiwidth - ((semiwidth> 20)? 15: 9);
 
                             } else {                            // == North & South ==
-                                left = Math.round(area.width / 2) - semiwidth - 1;
+                                left = Math.round(area.width / 2) - semiwidth - 5;
                             }
 
                             $handler.css({
@@ -629,7 +629,7 @@ ngAreas.directive("ngAreas", ['$parse', function ($parse) {
                         width: 0,
                         maxAreas: 0,
                         outlineOpacity: 0.5,
-                        overlayOpacity: 0.5,
+                        overlayOpacity: 0.4,
                         areas: [],
                         onLoaded: null,
                         onChanging: null,
