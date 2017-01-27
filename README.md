@@ -1,4 +1,4 @@
 # wa-isit
 Web Accessible Image Sub-region Identifier Tool
 
-![Screenshot of wa-isit](screenshot.jpg)
+![Screenshot of wa-isit](screenshot.png)
