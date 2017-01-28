@@ -38,6 +38,11 @@ app.controller(
                     });
                 });
             };
+
+            $scope.delete_all_regions = function () {
+                $scope.$broadcast("ngAreas:destroy");
+                $scope.$broadcast("ngAreas:reload");
+            };
         }
     ]
 );
