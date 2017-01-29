@@ -87,7 +87,8 @@ HSV_RANGES = {
     ]
 }
 
-METADATA_FILE = '/'.join([os.getcwd(), 'data/metadata_table_all.csv'])
+#METADATA_FILE = '/'.join([os.getcwd(), 'data/metadata_table_all.csv'])
+METADATA_FILE = os.path.join(os.path.dirname(os.path.abspath(__file__)),'..','data','metadata_table_all.csv')
 
 
 def create_mask(hsv_img, colors):
@@ -320,16 +321,18 @@ def get_trained_model(img_file, classifier='svc', cached=False):
 
     probe_str = "_".join(sorted(probes))
 
-    train_dir = "/".join(
-        [
-            os.getcwd(),
-            'data',
-            species,
-            development,
-            magnification,
-            probe_str
-        ]
-    )
+    # train_dir = "/".join(
+    #     [
+    #         os.getcwd(),
+    #         'data',
+    #         species,
+    #         development,
+    #         magnification,
+    #         probe_str
+    #     ]
+    # )
+
+    train_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)),'..','data',species,development,magnification,probe_str)
 
     cached_model_file = "svc_custom_all.fit"  # ".".join([classifier, 'fit'])
     cached_model_path = "/".join([train_dir, cached_model_file])
@@ -407,7 +410,7 @@ def get_custom_color_features(hsv_img):
         mask_img = cv2.bitwise_and(hsv_img, hsv_img, mask=mask)
 
         ret, thresh = cv2.threshold(mask, 1, 255, cv2.THRESH_BINARY)
-        new_mask, contours, hierarchy = cv2.findContours(
+        contours, hierarchy = cv2.findContours(
             thresh,
             cv2.RETR_EXTERNAL,
             cv2.CHAIN_APPROX_SIMPLE
