@@ -233,8 +233,8 @@ ngAreas.directive("ngAreas", ['$parse', function ($parse) {
                     if ($btDelete) {
                         $btDelete.css({
                             display: visible ? "block" : "none",
-                            left: area.x + area.width + 1,
-                            top: area.y - $btDelete.outerHeight() - 1,
+                            left: area.x + area.width + 8,
+                            top: area.y - $btDelete.outerHeight() + 8,
                             "z-index": area.z + 1
                         });
                     }

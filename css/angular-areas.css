@@ -13,8 +13,9 @@
 	background-color: floralwhite;
 	padding: 2px;
 	position: relative;
-	top: -20px;
+	top: -35px;
 	left: -40px;
+    white-space: nowrap;
 }
 
 .select-areas-overlay {
