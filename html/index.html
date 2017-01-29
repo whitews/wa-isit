@@ -22,16 +22,21 @@
     </div>
 
     <div class="row">
-      <div class="btn-group" uib-dropdown>
-        <button id="split-button" type="button" class="btn btn-default">Choose Image</button>
-        <button type="button" class="btn btn-default" uib-dropdown-toggle>
-          <span class="caret"></span>
-        </button>
-        <ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="split-button">
-          <li ng-repeat="img in images">
-            <a ng-click="image_selected(img)">{{img.name}}</a>
-          </li>
-        </ul>
+      <div class="col-md-3">
+        <div class="btn-group" uib-dropdown>
+          <button id="split-button" type="button" class="btn btn-default">Choose Image</button>
+          <button type="button" class="btn btn-default" uib-dropdown-toggle>
+            <span class="caret"></span>
+          </button>
+          <ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="split-button">
+            <li ng-repeat="img in images">
+              <a ng-click="image_selected(img)">{{img.name}}</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="col-md-9">
+        {{ current_image_name }}
       </div>
     </div>
 
@@ -46,8 +51,6 @@
              ng-areas-extend-data="{pageNumber: 1, tag: 'width800'}"
 				     ng-src="api/images/{{current_image}}?type=jpg"
              ng-if="current_image"/>
-
-        <!--<img ng-src="api/images/{{current_image}}?type=jpg" ng-show="current_image"/>-->
       </div>
       <div class="col-md-2" id="actions">
           <button type="button" class="btn btn-block btn-primary" ng-click="identify_regions()">Identify Regions</button>

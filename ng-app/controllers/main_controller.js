@@ -13,6 +13,7 @@ app.controller(
             $scope.image_selected = function (item) {
                 $scope.$broadcast('ngAreas:remove_all', {});
                 $scope.current_image = item.id;
+                $scope.current_image_name = item.name;
             };
 
             $scope.areas_changed = function (ev, boxId, areas, area) {
