@@ -15,4 +15,4 @@ trainor /trainor/standup.sh
 ```   
 
 ## Live Demo
-http://rapid-235.vm.duke.edu
+http://rapid-235.vm.duke.edu:5000
