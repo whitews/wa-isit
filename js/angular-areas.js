@@ -34,6 +34,11 @@ ngAreas.directive("ngAreas", ['$parse', function ($parse) {
                 mainImageSelectAreas.destroy();
             };
 
+            var remove_all = function () {
+                console.log('ngAreas:remove_all');
+                mainImageSelectAreas.remove_all();
+            };
+
             var reload = function () {
                 console.log('ngAreas:reload');
                 mainImageSelectAreas.init($element, getParameters());
@@ -48,6 +53,8 @@ ngAreas.directive("ngAreas", ['$parse', function ($parse) {
             };
 
             $scope.$on("ngAreas:reload", reload);
+
+            $scope.$on("ngAreas:remove_all", remove_all);
 
             $scope.$on("ngAreas:destroy", destroy);
 
@@ -477,7 +484,6 @@ ngAreas.directive("ngAreas", ['$parse', function ($parse) {
                 };
 
                 var deleteSelection = function (event) {
-                    cancelEvent(event);
                     $selection.remove();
                     $outline.remove();
                     $.each($resizeHandlers, function (card, $handler) {
@@ -776,7 +782,6 @@ ngAreas.directive("ngAreas", ['$parse', function ($parse) {
                 return tmp;
             };
 
-
             imageSelectAreas.prototype._refresh = function () {
                 var nbAreas = this.areas().length;
                 this.$overlay.css({
@@ -809,6 +814,12 @@ ngAreas.directive("ngAreas", ['$parse', function ($parse) {
                 if (this._areas[areaid]) {
                     this._areas[areaid].deleteSelection();
                 }
+            };
+
+            imageSelectAreas.prototype.remove_all = function () {
+                $.each(this._areas, function (areaid, area) {
+                    area.deleteSelection();
+                });
             };
 
             imageSelectAreas.prototype.newArea = function (event) {
@@ -902,6 +913,7 @@ ngAreas.directive("ngAreas", ['$parse', function ($parse) {
                     }
                 });
             };
+
             imageSelectAreas.prototype.blurAll = function () {
                 this._eachArea(function (area) {
                     area.blur();
@@ -918,7 +930,6 @@ ngAreas.directive("ngAreas", ['$parse', function ($parse) {
                 });
                 return res;
             };
-
 
             var execCommand = function (currentObject, command) {
                 if ( imageSelectAreas.prototype[command] ) { // Method call

@@ -11,6 +11,7 @@ app.controller(
             $scope.user_regions = null;
 
             $scope.image_selected = function (item) {
+                $scope.$broadcast('ngAreas:remove_all', {});
                 $scope.current_image = item.id;
             };
 
@@ -40,8 +41,7 @@ app.controller(
             };
 
             $scope.delete_all_regions = function () {
-                $scope.$broadcast("ngAreas:destroy");
-                $scope.$broadcast("ngAreas:reload");
+                $scope.$broadcast("ngAreas:remove_all");
             };
         }
     ]
