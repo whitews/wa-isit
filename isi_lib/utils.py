@@ -407,7 +407,7 @@ def get_custom_color_features(hsv_img):
         mask_img = cv2.bitwise_and(hsv_img, hsv_img, mask=mask)
 
         ret, thresh = cv2.threshold(mask, 1, 255, cv2.THRESH_BINARY)
-        new_mask, contours, hierarchy = cv2.findContours(
+        contours, hierarchy = cv2.findContours(
             thresh,
             cv2.RETR_EXTERNAL,
             cv2.CHAIN_APPROX_SIMPLE
