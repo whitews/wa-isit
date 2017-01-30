@@ -2,9 +2,10 @@ app.controller(
     'MainController',
     [
         '$scope',
+        '$timeout',
         'Image',
         'Region',
-        function ($scope, Image, Region) {
+        function ($scope, $timeout, Image, Region) {
             $scope.images = Image.query();
             $scope.current_image = null;
             $scope.init_regions = [];
@@ -18,14 +19,19 @@ app.controller(
                 $scope.current_image_name = item.name;
             };
 
-            $scope.areas_changed = function (ev, boxId, areas, area) {
+            $scope.areas_changed = function (ev, area, areas) {
                 $scope.user_regions = areas;
+                $scope.selected_region_probs = null;
 
-                for (var i = 0; i < $scope.user_regions.length; i++) {
-                    if ($scope.user_regions[i].z > 0) {
-                        $scope.selected_region_probs = $scope.region_probs[$scope.user_regions[i].areaid];
-                        break;
-                    }
+                if (area.z > 0) {
+                    $scope.selected_region_probs = $scope.region_probs[area.areaid];
+
+                    // since areas_changed is called from within the ngAreas directive, sometimes the
+                    // new $scope doesn't get applied to the partial, but a generic $scope.$apply will
+                    // cause other issues, so call apply at the end of the call stack
+                    $timeout(function() {
+                        $scope.$apply();
+                    }, 0);
                 }
 	        };
 
