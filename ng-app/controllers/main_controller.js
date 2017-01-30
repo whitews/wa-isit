@@ -27,7 +27,6 @@ app.controller(
                         break;
                     }
                 }
-                $scope.$apply();
 	        };
 
 	        $scope.identify_regions = function () {
@@ -48,6 +47,10 @@ app.controller(
                             name : data.predicted_class
                         });
                         $scope.region_probs[region.areaid] = data.probabilities;
+
+                        if (region.z > 0) {
+                            $scope.selected_region_probs = data.probabilities;
+                        }
                     });
                 });
             };
