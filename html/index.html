@@ -43,7 +43,7 @@
     <p></p>
 
     <div class="row">
-      <div class="col-md-10">
+      <div class="col-md-9">
         <img ng-areas="init_regions" ng-areas-width="800"
              ng-areas-allow="{'edit':true, 'move':true, 'resize':true, 'select':true, 'remove':true, 'nudge':false}"
              ng-areas-on-change="areas_changed"
@@ -52,9 +52,24 @@
 				     ng-src="api/images/{{current_image}}?type=jpg"
              ng-if="current_image"/>
       </div>
-      <div class="col-md-2" id="actions">
-          <button type="button" class="btn btn-block btn-primary" ng-click="identify_regions()">Identify Regions</button>
-          <button type="button" class="btn btn-block btn-danger" ng-click="delete_all_regions()">Delete All Regions</button>
+      <div class="col-md-3" id="actions">
+        <button type="button" class="btn btn-block btn-primary" ng-click="identify_regions()">Identify Regions</button>
+        <button type="button" class="btn btn-block btn-danger" ng-click="delete_all_regions()">Delete All Regions</button>
+
+        <p></p>
+
+        <table class="table">
+          <thead>
+            <th>Label</th>
+            <th>Probability</th>
+          </thead>
+          <tbody>
+            <tr ng-repeat="prob in selected_region_probs">
+              <td>{{ prob[0] }}</td>
+              <td class="text-right">{{ prob[1] * 100 | number:1 }}%</td>
+            </tr>
+          </tbody>
+        </table>
       </div>
     </div>
 

@@ -9,6 +9,8 @@ app.controller(
             $scope.current_image = null;
             $scope.init_regions = [];
             $scope.user_regions = null;
+            $scope.region_probs = {};
+            $scope.selected_region_probs = [];
 
             $scope.image_selected = function (item) {
                 $scope.$broadcast('ngAreas:remove_all', {});
@@ -18,6 +20,14 @@ app.controller(
 
             $scope.areas_changed = function (ev, boxId, areas, area) {
                 $scope.user_regions = areas;
+
+                for (var i = 0; i < $scope.user_regions.length; i++) {
+                    if ($scope.user_regions[i].z > 0) {
+                        $scope.selected_region_probs = $scope.region_probs[$scope.user_regions[i].areaid];
+                        break;
+                    }
+                }
+                $scope.$apply();
 	        };
 
 	        $scope.identify_regions = function () {
@@ -37,6 +47,7 @@ app.controller(
                             areaid : region.areaid,
                             name : data.predicted_class
                         });
+                        $scope.region_probs[region.areaid] = data.probabilities;
                     });
                 });
             };
