@@ -828,6 +828,8 @@ ngAreas.directive("ngAreas", ['$parse', function ($parse) {
                 if (this.options.maxAreas && this.options.maxAreas <=  this.areas().length) {
                     return areaid;
                 }
+
+                // TODO: not sure what this loop does if ngAreas.areaid is used to set areaid below
                 this._eachArea(function (area, index) {
                     areaid = Math.max(areaid, parseInt(index, 10));
                 });
