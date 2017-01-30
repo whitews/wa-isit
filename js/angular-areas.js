@@ -12,7 +12,6 @@ ngAreas.directive("ngAreas", ['$parse', function ($parse) {
             var allow = (typeof $attrs.ngAreasAllow === 'undefined') ? {}: eval('('+$attrs.ngAreasAllow+')');
             var getParameters = function () {
                 $scope.ngAreas_areas = $scope.$eval($attrs.ngAreas);
-                console.log(JSON.stringify($scope.ngAreas_areas));
                     return  {
                         width : (typeof $attrs.ngAreasWidth === 'undefined') ? 800 : $attrs.ngAreasWidth,
                         areas : (typeof $attrs.ngAreas ==='undefined') ? [] : $scope.ngAreas_areas,
@@ -30,19 +29,15 @@ ngAreas.directive("ngAreas", ['$parse', function ($parse) {
             };
             
             var destroy = function () {
-                console.log('ngAreas:destroy');
                 mainImageSelectAreas.destroy();
             };
 
             var remove_all = function () {
-                console.log('ngAreas:remove_all');
                 mainImageSelectAreas.remove_all();
             };
 
             var reload = function () {
-                console.log('ngAreas:reload');
                 mainImageSelectAreas.init($element, getParameters());
-                console.log('global Areas: '+JSON.stringify(ngAreas._areas));
             };
 
             var renameByAreaId = function (event, args) {
@@ -943,8 +938,6 @@ ngAreas.directive("ngAreas", ['$parse', function ($parse) {
                 }
             };
         },
-        link : function (scope, element, attrs) {
-            console.log('linked ngSelectAreas link');
-        }
+        link : function (scope, element, attrs) {}
     };
 }]);
